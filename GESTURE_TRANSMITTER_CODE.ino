@@ -17,9 +17,13 @@ int ADXL345 = 0x53; // The ADXL345 sensor I2C address
 float X_out, Y_out, Z_out;  // Outputs
 RF24 radio(8,10);
 
-
-
-
+const byte address[6]="00001";
+struct data{
+  int xAxis;
+  int yAxis;
+  int zAxis;
+};
+data send_data;
 
 void setup() {
   // put your setup code here, to run once:
@@ -50,12 +54,12 @@ void loop() {
   Wire.endTransmission(false);
   Wire.requestFrom(ADXL345, 6, true); // Read 6 registers total, each axis value is stored in 2 registers
   X_out = ( Wire.read()| Wire.read() << 8); // X-axis value
-  X_out = (X_out/256)*9.81; //For a range of +-2g, we need to divide the raw values by 256, according to the datasheet
+  send_data.xAxis = X_out = (X_out/256)*9.81; //For a range of +-2g, we need to divide the raw values by 256, according to the datasheet
   Y_out = ( Wire.read()| Wire.read() << 8); // Y-axis value
-  Y_out = (Y_out/256)*9.81;
+  send_data.yAxis = Y_out = (Y_out/256)*9.81;
   Z_out = ( Wire.read()| Wire.read() << 8); // Z-axis value
-  Z_out = (Z_out/256)*9.81;
-
+  send_data.zAxis = Z_out = (Z_out/256)*9.81;
+  Serial.println(send_data);
 
   radio.write(&send_data, sizeof(data));
 }
