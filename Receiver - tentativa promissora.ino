@@ -33,7 +33,7 @@ void setup()
 void loop()  
 {
 
-  if ( myRadio.available()) 
+  if ( myRadio.available())  
   {
     while (myRadio.available())
     {
@@ -44,10 +44,14 @@ void loop()
     Serial.println(data.yAxis);
     Serial.println(data.zAxis);
     Serial.println("cabo a leitura");
+    if(data.yAxis < -4){
+      Serial.println("Frente");
+    }
+     if(data.xAxis >= 7){
+      Serial.println("Direita");
+    }
+      if(data.xAxis <= -7){
+      Serial.println("Esquerda");
+    }
   }
-  else{
-    delay(100);
-    Serial.println("Error - não recebo nada");
-  }
-
 }
