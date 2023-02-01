@@ -84,6 +84,42 @@ void loop()
       digitalWrite(motor2_in1, LOW);
       digitalWrite(motor2_in2, HIGH);
     }
+    else if(data.xAxis<-3 && data.yAxis<-3){
+      Serial.println("--------");
+      Serial.println("Curva Esquerda");
+      digitalWrite(motor1_in1, HIGH);
+      digitalWrite(motor1_in2, LOW);
+
+      analogWrite(motor2_in1, 120);
+      analogWrite(motor2_in2, 0);
+    }
+    else if(data.xAxis>=3 && data.yAxis<-3){
+      Serial.println("--------");
+      Serial.println("Curva Direita");
+      analogWrite(motor1_in1, 120);
+      analogWrite(motor1_in2, 0);
+
+      digitalWrite(motor2_in1, HIGH);
+      digitalWrite(motor2_in2, LOW);
+    }
+    else if(data.xAxis < -4 && data.yAxis>=3){
+      Serial.println("--------");
+      Serial.println("Curva tras esquerda");
+      digitalWrite(motor1_in1, LOW);
+      digitalWrite(motor1_in2, HIGH);
+
+      analogWrite(motor2_in1, 0);
+      analogWrite(motor2_in2, 120);
+    }
+    else if(data.xAxis >= 2 && data.yAxis>=5){
+      Serial.println("--------");
+      Serial.println("Curva tras Direita");
+      analogWrite(motor1_in1, 0);
+      analogWrite(motor1_in2, 120);
+
+      digitalWrite(motor2_in1, LOW);
+      digitalWrite(motor2_in2, HIGH);
+    }
     else {
       digitalWrite(motor1_in1, LOW);
       digitalWrite(motor1_in2, LOW);
