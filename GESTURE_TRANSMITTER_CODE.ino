@@ -60,7 +60,6 @@ void loop()
   Serial.print("Z: ");
   Serial.println(data.zAxis);
 
-  myRadio.write(&data, sizeof(data)); 
 
   X_out = ( Wire.read()| Wire.read() << 8);
   data.xAxis = X_out = (X_out/256)*9.81;
@@ -69,4 +68,7 @@ void loop()
   Z_out = ( Wire.read()| Wire.read() << 8);
   data.zAxis = Z_out = (Z_out/256)*9.81;
 
+  myRadio.write(&data, sizeof(data)); 
+  
+  
 }
