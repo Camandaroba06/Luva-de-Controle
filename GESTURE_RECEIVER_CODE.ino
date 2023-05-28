@@ -30,7 +30,7 @@ void setup()
   delay(1000);
 
   myRadio.begin(); 
-  myRadio.setChannel(115); 
+  myRadio.setChannel(81); 
   myRadio.setPALevel(RF24_PA_MAX);
   myRadio.setDataRate( RF24_250KBPS ) ; 
   myRadio.openReadingPipe(1, addresses[0]);
